@@ -1,1 +1,1461 @@
-aa
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kari Cocina - Bocados Dulces y Salados</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-purple: #4A235A;
+            --secondary-purple: #7D3C98;
+            --accent-pink: #E91E63;
+            --accent-yellow: #F1C40F;
+            --light-bg: #F8F9FA;
+            --dark-text: #212529;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--dark-text);
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            background-color: var(--primary-purple);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .navbar-nav .nav-link {
+            color: rgba(255,255,255,0.8);
+            margin: 0 10px;
+            transition: color 0.3s;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: var(--accent-yellow);
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            padding: 80px 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://z-cdn-media.chatglm.cn/files/1c78da40-88d4-4a60-ac20-45a52d8d89e2_nuevologokaricocina.png?auth_key=1862607183-e6322a978dd14bb0baea65f645399f53-0-59d3f0c0b37d08352a14b78ae8eacb00');
+            background-size: contain;
+            background-position: right center;
+            background-repeat: no-repeat;
+            opacity: 0.2;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .btn-primary {
+            background-color: var(--accent-pink);
+            border-color: var(--accent-pink);
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #C2185B;
+            border-color: #C2185B;
+        }
+        
+        .btn-outline-primary {
+            color: var(--accent-pink);
+            border-color: var(--accent-pink);
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--accent-pink);
+            border-color: var(--accent-pink);
+        }
+        
+        .section-title {
+            color: var(--primary-purple);
+            margin-bottom: 30px;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--accent-pink);
+        }
+        
+        .product-card {
+            border: none;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            height: 100%;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .product-img {
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .price-tag {
+            background-color: var(--accent-yellow);
+            color: var(--dark-text);
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 20px;
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--accent-pink);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            height: 100%;
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--accent-pink);
+            margin-bottom: 20px;
+        }
+        
+        .price-table {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .price-table thead {
+            background-color: var(--primary-purple);
+            color: white;
+        }
+        
+        .price-table tbody tr:nth-child(even) {
+            background-color: var(--light-bg);
+        }
+        
+        .quote-form {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .footer {
+            background-color: var(--primary-purple);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            margin-right: 15px;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-yellow);
+        }
+        
+        .social-icons a {
+            color: white;
+            font-size: 1.5rem;
+            margin-right: 15px;
+            transition: transform 0.3s;
+        }
+        
+        .social-icons a:hover {
+            transform: scale(1.2);
+            color: var(--accent-yellow);
+        }
+        
+        .cart-sidebar {
+            position: fixed;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100vh;
+            background-color: white;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: right 0.3s;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        .cart-sidebar.active {
+            right: 0;
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-right: 15px;
+        }
+        
+        .cart-item-details {
+            flex-grow: 1;
+        }
+        
+        .cart-item-price {
+            font-weight: bold;
+            color: var(--accent-pink);
+        }
+        
+        .cart-item-remove {
+            color: var(--accent-pink);
+            cursor: pointer;
+        }
+        
+        .cart-footer {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+        
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        .admin-login {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 2000;
+            overflow-y: auto;
+        }
+        
+        .admin-content {
+            background-color: white;
+            width: 80%;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 1200px;
+        }
+        
+        .admin-tabs {
+            margin-bottom: 30px;
+        }
+        
+        .nav-tabs .nav-link {
+            color: var(--primary-purple);
+        }
+        
+        .nav-tabs .nav-link.active {
+            background-color: var(--primary-purple);
+            color: white;
+            border-color: var(--primary-purple);
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 0 0.25rem rgba(233, 30, 99, 0.25);
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: var(--light-bg);
+            border-radius: 10px;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            background-color: var(--accent-pink);
+            color: white;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateX(150%);
+            transition: transform 0.3s;
+            z-index: 3000;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 50px 0;
+            }
+            
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .admin-content {
+                width: 95%;
+                margin: 20px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://z-cdn-media.chatglm.cn/files/1c78da40-88d4-4a60-ac20-45a52d8d89e2_nuevologokaricocina.png?auth_key=1862607183-e6322a978dd14bb0baea65f645399f53-0-59d3f0c0b37d08352a14b78ae8eacb00" alt="Kari Cocina Logo" width="40" height="40" class="d-inline-block align-text-top">
+                KARI COCINA
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#products">Productos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#services">Servicios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#prices">Precios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contacto</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="cart-icon" onclick="toggleCart()">
+                            <i class="fas fa-shopping-cart text-white"></i>
+                            <span class="cart-count" id="cartCount">0</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center hero-content">
+                <div class="col-lg-6">
+                    <h1 class="display-4 fw-bold mb-4">KARICOCINA</h1>
+                    <h2 class="h2 mb-3">bocados dulces y salados</h2>
+                    <p class="lead mb-4">Donde la pasión por la cocina se convierte en arte.</p>
+                    <p class="mb-5">En KARICOCINA, fusionamos lo clásico con lo gourmet, ofreciendo una amplia gama de bocaditos dulces y salados que van más allá de los sabores convencionales. Nuestro compromiso con la calidad comienza en la cuidadosa selección de ingredientes, asegurando que cada bocado sea una experiencia excepcional.</p>
+                    <div>
+                        <button class="btn btn-primary btn-lg" onclick="scrollToSection('products')">Ver Catálogo</button>
+                        <button class="btn btn-outline-primary btn-lg" onclick="scrollToSection('contact')">Solicitar Presupuesto</button>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="https://z-cdn-media.chatglm.cn/files/1c78da40-88d4-4a60-ac20-45a52d8d89e2_nuevologokaricocina.png?auth_key=1862607183-e6322a978dd14bb0baea65f645399f53-0-59d3f0c0b37d08352a14b78ae8eacb00" alt="Kari Cocina" class="img-fluid">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Nuestros Productos</h2>
+            <div class="row" id="productList">
+                <!-- Products will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Servicios de Catering</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-birthday-cake"></i>
+                        </div>
+                        <h3>Fiestas y Celebraciones</h3>
+                        <p>Perfectos para cumpleaños, aniversarios y reuniones familiares. Ofrecemos una variedad de opciones dulces y saladas que sorprenderán a tus invitados.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>Eventos Corporativos</h3>
+                        <p>Impresiona a tus colegas y clientes con nuestra selección gourmet de bocaditos, ideales para reuniones de trabajo, conferencias y eventos de empresa.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-ring"></i>
+                        </div>
+                        <h3>Bodas y Ceremonias</h3>
+                        <p>Haz de tu día especial un momento inolvidable con nuestros elegantes y deliciosos bocaditos, diseñados para complementar la perfección de tu evento.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Prices Section -->
+    <section id="prices" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Nuestros Precios</h2>
+            <div class="table-responsive">
+                <table class="table price-table">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Tamaño/Porción</th>
+                            <th>Precio</th>
+                            <th>Disponibilidad</th>
+                        </tr>
+                    </thead>
+                    <tbody id="priceList">
+                        <!-- Prices will be loaded here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quote Request Section -->
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Solicitar Presupuesto</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="quote-form">
+                        <form id="quoteForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="name" class="form-label">Nombre Completo</label>
+                                    <input type="text" class="form-control" id="name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="email" class="form-label">Correo Electrónico</label>
+                                    <input type="email" class="form-control" id="email" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone" class="form-label">Teléfono</label>
+                                    <input type="tel" class="form-control" id="phone" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="eventDate" class="form-label">Fecha del Evento</label>
+                                    <input type="date" class="form-control" id="eventDate" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="eventType" class="form-label">Tipo de Evento</label>
+                                <select class="form-select" id="eventType" required>
+                                    <option value="" selected disabled>Selecciona una opción</option>
+                                    <option value="birthday">Cumpleaños</option>
+                                    <option value="wedding">Boda</option>
+                                    <option value="corporate">Corporativo</option>
+                                    <option value="family">Reunión Familiar</option>
+                                    <option value="other">Otro</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="guests" class="form-label">Número de Invitados</label>
+                                <input type="number" class="form-control" id="guests" min="1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message" class="form-label">Mensaje Adicional</label>
+                                <textarea class="form-control" id="message" rows="4"></textarea>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary btn-lg">Enviar Solicitud</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">KARI COCINA</h5>
+                    <p>Bocados dulces y salados. Donde la pasión por la cocina se convierte en arte.</p>
+                    <div class="social-icons mt-3">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">Enlaces Rápidos</h5>
+                    <div class="footer-links d-flex flex-column">
+                        <a href="#home">Inicio</a>
+                        <a href="#products">Productos</a>
+                        <a href="#services">Servicios</a>
+                        <a href="#prices">Precios</a>
+                        <a href="#contact">Contacto</a>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5 class="mb-3">Contacto</h5>
+                    <p><i class="fas fa-phone me-2"></i> 0985 710183</p>
+                    <p><i class="fas fa-envelope me-2"></i> info@karicocina.com</p>
+                    <p><i class="fas fa-map-marker-alt me-2"></i> Ciudad, País</p>
+                </div>
+            </div>
+            <hr class="my-4 bg-white">
+            <div class="text-center">
+                <p>&copy; 2023 KARI COCINA. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Tu Carrito</h3>
+            <button class="btn btn-sm btn-outline-danger" onclick="toggleCart()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="cartItems">
+            <!-- Cart items will be loaded here -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">$0.00</span>
+            </div>
+            <button class="btn btn-primary w-100" onclick="checkout()">Proceder al Pago</button>
+        </div>
+    </div>
+
+    <!-- Admin Login Button -->
+    <div class="admin-login">
+        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#adminLoginModal">
+            <i class="fas fa-user-shield me-2"></i>Admin
+        </button>
+    </div>
+
+    <!-- Admin Login Modal -->
+    <div class="modal fade" id="adminLoginModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Acceso Administrador</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="adminLoginForm">
+                        <div class="mb-3">
+                            <label for="adminUsername" class="form-label">Usuario</label>
+                            <input type="text" class="form-control" id="adminUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminPassword" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control" id="adminPassword" required>
+                        </div>
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">Ingresar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-content">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2>Panel de Administración</h2>
+                <button class="btn btn-danger" onclick="closeAdminPanel()">
+                    <i class="fas fa-times me-2"></i>Cerrar
+                </button>
+            </div>
+            
+            <ul class="nav nav-tabs admin-tabs" id="adminTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="products-tab" data-bs-toggle="tab" data-bs-target="#products-panel" type="button" role="tab">Productos</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="prices-tab" data-bs-toggle="tab" data-bs-target="#prices-panel" type="button" role="tab">Precios</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="customers-tab" data-bs-toggle="tab" data-bs-target="#customers-panel" type="button" role="tab">Clientes</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="recipes-tab" data-bs-toggle="tab" data-bs-target="#recipes-panel" type="button" role="tab">Recetas</button>
+                </li>
+            </ul>
+            
+            <div class="tab-content" id="adminTabContent">
+                <!-- Products Panel -->
+                <div class="tab-pane fade show active" id="products-panel" role="tabpanel">
+                    <div class="form-section">
+                        <h3>Agregar Nuevo Producto</h3>
+                        <form id="addProductForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="productName" class="form-label">Nombre del Producto</label>
+                                    <input type="text" class="form-control" id="productName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="productCategory" class="form-label">Categoría</label>
+                                    <select class="form-select" id="productCategory" required>
+                                        <option value="" selected disabled>Selecciona una opción</option>
+                                        <option value="dulces">Dulces</option>
+                                        <option value="salados">Salados</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="productPrice" class="form-label">Precio</label>
+                                    <input type="number" class="form-control" id="productPrice" step="0.01" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="productImage" class="form-label">URL de la Imagen</label>
+                                    <input type="url" class="form-control" id="productImage" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="productDescription" class="form-label">Descripción</label>
+                                <textarea class="form-control" id="productDescription" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Agregar Producto</button>
+                        </form>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Lista de Productos</h3>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Categoría</th>
+                                        <th>Precio</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminProductList">
+                                    <!-- Product list will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Prices Panel -->
+                <div class="tab-pane fade" id="prices-panel" role="tabpanel">
+                    <div class="form-section">
+                        <h3>Agregar Nuevo Precio</h3>
+                        <form id="addPriceForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="priceProduct" class="form-label">Producto</label>
+                                    <input type="text" class="form-control" id="priceProduct" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="priceSize" class="form-label">Tamaño/Porción</label>
+                                    <input type="text" class="form-control" id="priceSize" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="priceValue" class="form-label">Precio</label>
+                                    <input type="number" class="form-control" id="priceValue" step="0.01" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="priceAvailability" class="form-label">Disponibilidad</label>
+                                    <select class="form-select" id="priceAvailability" required>
+                                        <option value="Disponible">Disponible</option>
+                                        <option value="Agotado">Agotado</option>
+                                        <option value="Bajo Stock">Bajo Stock</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="priceDate" class="form-label">Fecha de Actualización</label>
+                                    <input type="date" class="form-control" id="priceDate" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="priceLocation" class="form-label">Lugar de Venta</label>
+                                    <input type="text" class="form-control" id="priceLocation" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Agregar Precio</button>
+                        </form>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Lista de Precios</h3>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Producto</th>
+                                        <th>Tamaño</th>
+                                        <th>Precio</th>
+                                        <th>Disponibilidad</th>
+                                        <th>Fecha</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminPriceList">
+                                    <!-- Price list will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Customers Panel -->
+                <div class="tab-pane fade" id="customers-panel" role="tabpanel">
+                    <div class="form-section">
+                        <h3>Agregar Nuevo Cliente</h3>
+                        <form id="addCustomerForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="customerName" class="form-label">Nombre Completo</label>
+                                    <input type="text" class="form-control" id="customerName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="customerEmail" class="form-label">Correo Electrónico</label>
+                                    <input type="email" class="form-control" id="customerEmail" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="customerPhone" class="form-label">Teléfono</label>
+                                    <input type="tel" class="form-control" id="customerPhone" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="customerAddress" class="form-label">Dirección</label>
+                                    <input type="text" class="form-control" id="customerAddress" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Agregar Cliente</button>
+                        </form>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Lista de Clientes</h3>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Correo</th>
+                                        <th>Teléfono</th>
+                                        <th>Dirección</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminCustomerList">
+                                    <!-- Customer list will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recipes Panel -->
+                <div class="tab-pane fade" id="recipes-panel" role="tabpanel">
+                    <div class="form-section">
+                        <h3>Agregar Nueva Receta</h3>
+                        <form id="addRecipeForm">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="recipeName" class="form-label">Nombre de la Receta</label>
+                                    <input type="text" class="form-control" id="recipeName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="recipeCategory" class="form-label">Categoría</label>
+                                    <select class="form-select" id="recipeCategory" required>
+                                        <option value="" selected disabled>Selecciona una opción</option>
+                                        <option value="dulces">Dulces</option>
+                                        <option value="salados">Salados</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipeIngredients" class="form-label">Ingredientes</label>
+                                <textarea class="form-control" id="recipeIngredients" rows="3" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="recipeInstructions" class="form-label">Instrucciones</label>
+                                <textarea class="form-control" id="recipeInstructions" rows="5" required></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="recipePrepTime" class="form-label">Tiempo de Preparación</label>
+                                    <input type="text" class="form-control" id="recipePrepTime" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="recipeServings" class="form-label">Porciones</label>
+                                    <input type="number" class="form-control" id="recipeServings" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Agregar Receta</button>
+                        </form>
+                    </div>
+                    
+                    <div class="form-section">
+                        <h3>Lista de Recetas</h3>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Nombre</th>
+                                        <th>Categoría</th>
+                                        <th>Tiempo</th>
+                                        <th>Porciones</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminRecipeList">
+                                    <!-- Recipe list will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sample data
+        const products = [
+            {
+                id: 1,
+                name: "Mini Tarta de Chocolate",
+                category: "dulces",
+                price: 5.50,
+                image: "https://picsum.photos/seed/chocolate/400/300.jpg",
+                description: "Deliciosa mini tarta de chocolate con relleno cremoso y cobertura de ganache."
+            },
+            {
+                id: 2,
+                name: "Canapés de Salmón",
+                category: "salados",
+                price: 4.75,
+                image: "https://picsum.photos/seed/salmon/400/300.jpg",
+                description: "Refrescantes canapés con salmón ahumado, queso crema y eneldo."
+            },
+            {
+                id: 3,
+                name: "Macarons de Fresa",
+                category: "dulces",
+                price: 3.25,
+                image: "https://picsum.photos/seed/macaron/400/300.jpg",
+                description: "Delicados macarons franceses con sabor a fresa y relleno de buttercream."
+            },
+            {
+                id: 4,
+                name: "Mini Quiches de Espinaca",
+                category: "salados",
+                price: 4.00,
+                image: "https://picsum.photos/seed/quiche/400/300.jpg",
+                description: "Pequeñas quiches con espinaca, queso feta y hierbas aromáticas."
+            },
+            {
+                id: 5,
+                name: "Tartaletas de Limón",
+                category: "dulces",
+                price: 4.50,
+                image: "https://picsum.photos/seed/lemon/400/300.jpg",
+                description: "Tartaletas con base de masa quebrada y relleno de limón merengada."
+            },
+            {
+                id: 6,
+                name: "Rollitos de Jamón",
+                category: "salados",
+                price: 3.75,
+                image: "https://picsum.photos/seed/ham/400/300.jpg",
+                description: "Rollitos de jamón serrano con queso crema y aceitunas."
+            }
+        ];
+
+        const prices = [
+            {
+                id: 1,
+                product: "Mini Tarta de Chocolate",
+                size: "Unidad",
+                price: 5.50,
+                availability: "Disponible",
+                date: "2023-10-15",
+                location: "Tienda Central"
+            },
+            {
+                id: 2,
+                product: "Canapés de Salmón",
+                size: "Porción (6 unidades)",
+                price: 28.50,
+                availability: "Disponible",
+                date: "2023-10-15",
+                location: "Tienda Central"
+            },
+            {
+                id: 3,
+                product: "Macarons de Fresa",
+                size: "Caja (12 unidades)",
+                price: 39.00,
+                availability: "Bajo Stock",
+                date: "2023-10-14",
+                location: "Tienda Central"
+            },
+            {
+                id: 4,
+                product: "Mini Quiches de Espinaca",
+                size: "Porción (4 unidades)",
+                price: 16.00,
+                availability: "Disponible",
+                date: "2023-10-15",
+                location: "Tienda Central"
+            },
+            {
+                id: 5,
+                product: "Tartaletas de Limón",
+                size: "Unidad",
+                price: 4.50,
+                availability: "Disponible",
+                date: "2023-10-15",
+                location: "Tienda Central"
+            },
+            {
+                id: 6,
+                product: "Rollitos de Jamón",
+                size: "Porción (8 unidades)",
+                price: 30.00,
+                availability: "Disponible",
+                date: "2023-10-15",
+                location: "Tienda Central"
+            }
+        ];
+
+        const customers = [
+            {
+                id: 1,
+                name: "María González",
+                email: "maria.gonzalez@email.com",
+                phone: "099123456",
+                address: "Calle Principal 123, Ciudad"
+            },
+            {
+                id: 2,
+                name: "Juan Pérez",
+                email: "juan.perez@email.com",
+                phone: "099654321",
+                address: "Avenida Secundaria 456, Ciudad"
+            },
+            {
+                id: 3,
+                name: "Ana Rodríguez",
+                email: "ana.rodriguez@email.com",
+                phone: "099789012",
+                address: "Plaza Central 789, Ciudad"
+            }
+        ];
+
+        const recipes = [
+            {
+                id: 1,
+                name: "Mini Tarta de Chocolate",
+                category: "dulces",
+                ingredients: "Chocolate negro, mantequilla, huevos, azúcar, harina, crema de leche",
+                instructions: "Derretir el chocolate con la mantequilla. Batir los huevos con el azúcar. Mezclar todos los ingredientes. Hornear a 180°C por 15 minutos.",
+                prepTime: "30 minutos",
+                servings: 6
+            },
+            {
+                id: 2,
+                name: "Canapés de Salmón",
+                category: "salados",
+                ingredients: "Pan de molde, salmón ahumado, queso crema, eneldo, limón",
+                instructions: "Cortar el pan en círculos. Untar queso crema. Colocar el salmón ahumado. Decorar con eneldo y unas gotas de limón.",
+                prepTime: "15 minutos",
+                servings: 6
+            },
+            {
+                id: 3,
+                name: "Macarons de Fresa",
+                category: "dulces",
+                ingredients: "Harina de almendras, azúcar glas, claras de huevo, azúcar, colorante rojo, fresas, mantequilla",
+                instructions: "Preparar los merengues con las claras y el azúcar. Mezclar con la harina de almendras y el azúcar glas. Hornear a 150°C por 12 minutos. Preparar el buttercream con fresas.",
+                prepTime: "60 minutos",
+                servings: 12
+            }
+        ];
+
+        // Cart functionality
+        let cart = [];
+
+        function loadProducts() {
+            const productList = document.getElementById('productList');
+            productList.innerHTML = '';
+            
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'col-md-4 mb-4';
+                productCard.innerHTML = `
+                    <div class="card product-card">
+                        <div class="position-relative">
+                            <img src="${product.image}" class="card-img-top product-img" alt="${product.name}">
+                            <span class="price-tag">$${product.price.toFixed(2)}</span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">${product.name}</h5>
+                            <p class="card-text">${product.description}</p>
+                            <button class="btn btn-primary" onclick="addToCart(${product.id})">
+                                <i class="fas fa-cart-plus me-2"></i>Agregar al Carrito
+                            </button>
+                        </div>
+                    </div>
+                `;
+                productList.appendChild(productCard);
+            });
+        }
+
+        function loadPrices() {
+            const priceList = document.getElementById('priceList');
+            priceList.innerHTML = '';
+            
+            prices.forEach(price => {
+                const priceRow = document.createElement('tr');
+                priceRow.innerHTML = `
+                    <td>${price.product}</td>
+                    <td>${price.size}</td>
+                    <td>$${price.price.toFixed(2)}</td>
+                    <td><span class="badge ${price.availability === 'Disponible' ? 'bg-success' : price.availability === 'Bajo Stock' ? 'bg-warning' : 'bg-danger'}">${price.availability}</span></td>
+                `;
+                priceList.appendChild(priceRow);
+            });
+        }
+
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity++;
+            } else {
+                cart.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+            showNotification('Producto agregado al carrito');
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartItems = document.getElementById('cartItems');
+            const cartCount = document.getElementById('cartCount');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            cartItems.innerHTML = '';
+            let total = 0;
+            let count = 0;
+            
+            cart.forEach(item => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="cart-item-details">
+                        <h5>${item.name}</h5>
+                        <p>Cantidad: ${item.quantity}</p>
+                        <p class="cart-item-price">$${(item.price * item.quantity).toFixed(2)}</p>
+                    </div>
+                    <div class="cart-item-remove" onclick="removeFromCart(${item.id})">
+                        <i class="fas fa-trash"></i>
+                    </div>
+                `;
+                cartItems.appendChild(cartItem);
+                
+                total += item.price * item.quantity;
+                count += item.quantity;
+            });
+            
+            cartCount.textContent = count;
+            cartTotal.textContent = `$${total.toFixed(2)}`;
+        }
+
+        function toggleCart() {
+            const cartSidebar = document.getElementById('cartSidebar');
+            cartSidebar.classList.toggle('active');
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                showNotification('Tu carrito está vacío');
+                return;
+            }
+            
+            // Here you would implement the checkout process
+            showNotification('Procesando tu pedido...');
+            cart = [];
+            updateCart();
+            toggleCart();
+        }
+
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            section.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Admin functionality
+        document.getElementById('adminLoginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('adminUsername').value;
+            const password = document.getElementById('adminPassword').value;
+            
+            if (username === 'kari' && password === '04051990') {
+                document.getElementById('adminLoginModal').classList.remove('show');
+                document.getElementById('adminPanel').style.display = 'block';
+                loadAdminData();
+                showNotification('Bienvenido al panel de administración');
+            } else {
+                showNotification('Usuario o contraseña incorrectos');
+            }
+        });
+
+        function closeAdminPanel() {
+            document.getElementById('adminPanel').style.display = 'none';
+        }
+
+        function loadAdminData() {
+            // Load products
+            const adminProductList = document.getElementById('adminProductList');
+            adminProductList.innerHTML = '';
+            
+            products.forEach(product => {
+                const productRow = document.createElement('tr');
+                productRow.innerHTML = `
+                    <td>${product.id}</td>
+                    <td>${product.name}</td>
+                    <td>${product.category}</td>
+                    <td>$${product.price.toFixed(2)}</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+                adminProductList.appendChild(productRow);
+            });
+            
+            // Load prices
+            const adminPriceList = document.getElementById('adminPriceList');
+            adminPriceList.innerHTML = '';
+            
+            prices.forEach(price => {
+                const priceRow = document.createElement('tr');
+                priceRow.innerHTML = `
+                    <td>${price.id}</td>
+                    <td>${price.product}</td>
+                    <td>${price.size}</td>
+                    <td>$${price.price.toFixed(2)}</td>
+                    <td>${price.availability}</td>
+                    <td>${price.date}</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+                adminPriceList.appendChild(priceRow);
+            });
+            
+            // Load customers
+            const adminCustomerList = document.getElementById('adminCustomerList');
+            adminCustomerList.innerHTML = '';
+            
+            customers.forEach(customer => {
+                const customerRow = document.createElement('tr');
+                customerRow.innerHTML = `
+                    <td>${customer.id}</td>
+                    <td>${customer.name}</td>
+                    <td>${customer.email}</td>
+                    <td>${customer.phone}</td>
+                    <td>${customer.address}</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+                adminCustomerList.appendChild(customerRow);
+            });
+            
+            // Load recipes
+            const adminRecipeList = document.getElementById('adminRecipeList');
+            adminRecipeList.innerHTML = '';
+            
+            recipes.forEach(recipe => {
+                const recipeRow = document.createElement('tr');
+                recipeRow.innerHTML = `
+                    <td>${recipe.id}</td>
+                    <td>${recipe.name}</td>
+                    <td>${recipe.category}</td>
+                    <td>${recipe.prepTime}</td>
+                    <td>${recipe.servings}</td>
+                    <td>
+                        <button class="btn btn-sm btn-warning"><i class="fas fa-edit"></i></button>
+                        <button class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></button>
+                    </td>
+                `;
+                adminRecipeList.appendChild(recipeRow);
+            });
+        }
+
+        // Add product form
+        document.getElementById('addProductForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('productName').value;
+            const category = document.getElementById('productCategory').value;
+            const price = parseFloat(document.getElementById('productPrice').value);
+            const image = document.getElementById('productImage').value;
+            const description = document.getElementById('productDescription').value;
+            
+            const newProduct = {
+                id: products.length + 1,
+                name,
+                category,
+                price,
+                image,
+                description
+            };
+            
+            products.push(newProduct);
+            loadProducts();
+            loadAdminData();
+            this.reset();
+            showNotification('Producto agregado correctamente');
+        });
+
+        // Add price form
+        document.getElementById('addPriceForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const product = document.getElementById('priceProduct').value;
+            const size = document.getElementById('priceSize').value;
+            const price = parseFloat(document.getElementById('priceValue').value);
+            const availability = document.getElementById('priceAvailability').value;
+            const date = document.getElementById('priceDate').value;
+            const location = document.getElementById('priceLocation').value;
+            
+            const newPrice = {
+                id: prices.length + 1,
+                product,
+                size,
+                price,
+                availability,
+                date,
+                location
+            };
+            
+            prices.push(newPrice);
+            loadPrices();
+            loadAdminData();
+            this.reset();
+            showNotification('Precio agregado correctamente');
+        });
+
+        // Add customer form
+        document.getElementById('addCustomerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('customerName').value;
+            const email = document.getElementById('customerEmail').value;
+            const phone = document.getElementById('customerPhone').value;
+            const address = document.getElementById('customerAddress').value;
+            
+            const newCustomer = {
+                id: customers.length + 1,
+                name,
+                email,
+                phone,
+                address
+            };
+            
+            customers.push(newCustomer);
+            loadAdminData();
+            this.reset();
+            showNotification('Cliente agregado correctamente');
+        });
+
+        // Add recipe form
+        document.getElementById('addRecipeForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('recipeName').value;
+            const category = document.getElementById('recipeCategory').value;
+            const ingredients = document.getElementById('recipeIngredients').value;
+            const instructions = document.getElementById('recipeInstructions').value;
+            const prepTime = document.getElementById('recipePrepTime').value;
+            const servings = parseInt(document.getElementById('recipeServings').value);
+            
+            const newRecipe = {
+                id: recipes.length + 1,
+                name,
+                category,
+                ingredients,
+                instructions,
+                prepTime,
+                servings
+            };
+            
+            recipes.push(newRecipe);
+            loadAdminData();
+            this.reset();
+            showNotification('Receta agregada correctamente');
+        });
+
+        // Quote form
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Here you would implement the quote request process
+            showNotification('Solicitud de presupuesto enviada. Nos contactaremos pronto.');
+            this.reset();
+        });
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProducts();
+            loadPrices();
+        });
+    </script>
+</body>
+</html>
