@@ -7,7 +7,7 @@
     <!-- SEO & Meta Tags -->
     <title>Kari Cocina - Bocados Dulces y Salados | Catering Gourmet</title>
     <meta name="description" content="KARICOCINA, bocados dulces y salados. Donde la pasión por la cocina se convierte en arte. Fusionamos lo clásico con lo gourmet.">
-    <meta name="keywords" content="catering, bocados, dulces, salados, eventos, gourmet, Kari Cocina">
+    <meta name="keywords" content="catering, bocados, dulces, salados, eventos, gourmet">
     <meta name="author" content="Kari Cocina">
     <link rel="canonical" href="https://karicocina.github.io/web">
     
@@ -16,11 +16,11 @@
     <meta property="og:description" content="Donde la pasión por la cocina se convierte en arte">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://karicocina.github.io/web">
-    <meta property="og:image" content="https://raw.githubusercontent.com/karicocina/web/main/nuevologokaricocina_Sinfondo.png">
+    <meta property="og:image" content="https://raw.githubusercontent.com/karicocina/web/main/nuevologokaricocina.png">
     
     <!-- Icons -->
     <link rel="icon" href="https://raw.githubusercontent.com/karicocina/web/main/nuevologokaricocina.png" type="image/png">
-    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/karicocina/web/main/nuevologokaricocina_Sinfondo.png">
+    <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/karicocina/web/main/nuevologokaricocina.png">
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,10 +30,12 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- Splide CSS (Carrusel) -->
+    <!-- Splide CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
     
-    <!-- CSS Variables - Colores del Logo -->
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <style>
         :root {
             --color-primary: #4A235A;
@@ -66,15 +68,8 @@
             --color-white: #1A1A1A;
         }
         
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         
         body {
             font-family: var(--font-sans);
@@ -82,8 +77,6 @@
             background: var(--color-white);
             overflow-x: hidden;
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
         
         /* Loader */
@@ -205,7 +198,7 @@
             font-weight: 600;
         }
         
-        /* Hero Section */
+        /* Hero */
         .hero {
             min-height: 100vh;
             background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
@@ -213,6 +206,7 @@
             align-items: center;
             position: relative;
             overflow: hidden;
+            padding-top: 80px;
         }
         
         .hero::before {
@@ -259,17 +253,13 @@
             z-index: 1;
             filter: drop-shadow(var(--shadow-xl));
             animation: fadeInRight 1s ease-out;
+            max-width: 100%;
+            height: auto;
         }
         
         @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
         
         .btn-primary {
@@ -285,6 +275,7 @@
         .btn-primary:hover {
             transform: translateY(-3px);
             box-shadow: var(--shadow-md);
+            background: linear-gradient(135deg, #C2185B 0%, var(--color-accent) 100%);
         }
         
         .btn-outline-primary {
@@ -327,7 +318,7 @@
             border-radius: 2px;
         }
         
-        /* Product Cards */
+        /* Products */
         .product-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -430,7 +421,7 @@
             transform: scale(1.1);
         }
         
-        /* Prices Table */
+        /* Prices */
         .price-table {
             background: var(--color-white);
             border-radius: var(--radius-lg);
@@ -443,14 +434,8 @@
             color: var(--color-white);
         }
         
-        .price-table th {
+        .price-table th, .price-table td {
             padding: 1.2rem;
-            font-weight: 600;
-            border: none;
-        }
-        
-        .price-table td {
-            padding: 1rem 1.2rem;
             vertical-align: middle;
         }
         
@@ -459,21 +444,31 @@
             border-radius: 20px;
             font-size: 0.85rem;
             font-weight: 600;
+            display: inline-block;
         }
         
-        .availability-badge.available {
-            background: var(--color-success);
-            color: white;
+        .availability-badge.disponible { background: var(--color-success); color: white; }
+        .availability-badge.bajo-stock { background: var(--color-warning); color: white; }
+        .availability-badge.agotado { background: var(--color-danger); color: white; }
+        
+        /* Testimonials */
+        .testimonial-card {
+            background: var(--color-white);
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            text-align: center;
         }
         
-        .availability-badge.low-stock {
-            background: var(--color-warning);
-            color: white;
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
         }
         
-        .availability-badge.out-of-stock {
-            background: var(--color-danger);
-            color: white;
+        .stars i {
+            color: var(--color-gold);
+            margin: 0 2px;
         }
         
         /* Quote Form */
@@ -497,12 +492,6 @@
         .form-control:focus, .form-select:focus {
             border-color: var(--color-accent);
             box-shadow: 0 0 0 0.25rem rgba(233, 30, 99, 0.25);
-        }
-        
-        .form-label {
-            font-weight: 500;
-            color: var(--color-primary);
-            margin-bottom: 0.5rem;
         }
         
         /* Cart Sidebar */
@@ -551,10 +540,6 @@
             border-radius: var(--radius-sm);
         }
         
-        .cart-item-details {
-            flex: 1;
-        }
-        
         .quantity-controls {
             display: flex;
             align-items: center;
@@ -582,12 +567,12 @@
         
         /* Admin Panel */
         .admin-panel {
+            display: none;
             position: fixed;
             inset: 0;
             background: rgba(0,0,0,0.8);
             z-index: 2000;
             overflow-y: auto;
-            display: none;
         }
         
         .admin-panel.active {
@@ -624,6 +609,9 @@
         .admin-tabs {
             border-bottom: 2px solid #eee;
             margin-bottom: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
         
         .admin-tab {
@@ -634,6 +622,7 @@
             color: #6c757d;
             font-weight: 600;
             transition: var(--transition);
+            cursor: pointer;
         }
         
         .admin-tab.active {
@@ -643,6 +632,14 @@
         
         .admin-tab:hover {
             color: var(--color-primary);
+        }
+        
+        .admin-tab-pane {
+            display: none;
+        }
+        
+        .admin-tab-pane.active {
+            display: block;
         }
         
         /* Data Tables */
@@ -795,46 +792,7 @@
             transform: translateY(-3px);
         }
         
-        /* Responsive */
-        @media (max-width: 768px) {
-            .cart-sidebar {
-                width: 100%;
-                right: -100%;
-            }
-            
-            .hero-content {
-                text-align: center;
-                padding: 2rem 0;
-            }
-            
-            .hero::before {
-                background-size: 300px;
-                background-position: center;
-                opacity: 0.1;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .quote-form {
-                padding: 1.5rem;
-            }
-        }
-        
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        /* Dark Mode Toggle */
+        /* Theme Toggle */
         .theme-toggle {
             position: fixed;
             bottom: 20px;
@@ -858,25 +816,72 @@
         .theme-toggle:hover {
             transform: scale(1.1);
         }
+        
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .hero {
+                padding-top: 100px;
+            }
+            
+            .hero-content {
+                text-align: center;
+                padding: 2rem 0;
+            }
+            
+            .hero::before {
+                background-size: 300px;
+                background-position: center;
+                opacity: 0.1;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .quote-form {
+                padding: 1.5rem;
+            }
+            
+            .admin-content {
+                margin: 0;
+                border-radius: 0;
+            }
+        }
     </style>
 </head>
 <body>
+
     <!-- Loader -->
     <div class="loader-wrapper" id="loader">
         <div class="loader"></div>
     </div>
 
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="#home">
                 <img src="https://raw.githubusercontent.com/karicocina/web/main/nuevologokaricocina.png" alt="Kari Cocina Logo">
                 KARI COCINA
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon" style="color: white;">
-                    <i class="fas fa-bars"></i>
-                </span>
+                <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto align-items-center">
@@ -929,7 +934,7 @@
             
             <!-- Filters -->
             <div class="row mb-4">
-                <div class="col-md-6">
+                <div class="col-md-6 mb-3 mb-md-0">
                     <input type="text" class="form-control" id="productSearch" placeholder="🔍 Buscar productos...">
                 </div>
                 <div class="col-md-6">
@@ -1049,7 +1054,7 @@
                                 <option value="cumpleaños">Cumpleaños</option>
                                 <option value="boda">Boda</option>
                                 <option value="corporativo">Corporativo</option>
-                                <option value="familiar">Reunión Familiar</option>
+                                <option value="reunion">Reunión Familiar</option>
                                 <option value="otro">Otro</option>
                             </select>
                         </div>
@@ -1061,15 +1066,9 @@
                     <div class="mb-3">
                         <label class="form-label">Servicios de Interés</label>
                         <div class="row">
-                            <div class="col-md-4">
-                                <label><input type="checkbox" value="dulces"> Dulces</label>
-                            </div>
-                            <div class="col-md-4">
-                                <label><input type="checkbox" value="salados"> Salados</label>
-                            </div>
-                            <div class="col-md-4">
-                                <label><input type="checkbox" value="bebidas"> Bebidas</label>
-                            </div>
+                            <div class="col-md-4"><label><input type="checkbox" value="dulces"> Dulces</label></div>
+                            <div class="col-md-4"><label><input type="checkbox" value="salados"> Salados</label></div>
+                            <div class="col-md-4"><label><input type="checkbox" value="bebidas"> Bebidas</label></div>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -1129,7 +1128,7 @@
             </div>
             <hr>
             <div class="text-center">
-                <p>&copy; 2025 KARI COCINA. Todos los derechos reservados. | Desarrollado con ❤️ y pasión</p>
+                <p>&copy; 2025 KARI COCINA. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
@@ -1334,7 +1333,7 @@
     </button>
 
     <!-- Admin Login Button -->
-    <div class="admin-login-btn" style="position: fixed; bottom: 20px; right: 20px; z-index: 999;">
+    <div style="position: fixed; bottom: 20px; right: 20px; z-index: 999;">
         <button class="btn btn-primary" onclick="admin.openLogin()">
             <i class="fas fa-user-shield me-2"></i>Admin
         </button>
@@ -1346,7 +1345,7 @@
     
     <script>
         // =========================================================================
-        // SISTEMA DE BASE DE DATOS LOCAL (Simula backend)
+        // DATABASE SYSTEM
         // =========================================================================
         class Database {
             constructor() {
@@ -1355,91 +1354,61 @@
             }
             
             init() {
-                // Initialize with sample data if empty
-                if (!this.get('products')) {
-                    this.set('products', [
-                        {
-                            id: 1,
-                            name: "Mini Tarta de Chocolate",
-                            category: "dulces",
-                            price: 5.50,
-                            image: "https://raw.githubusercontent.com/karicocina/web/main/fotos/tarta_chocolate.jpg",
-                            description: "Deliciosa mini tarta de chocolate con relleno cremoso y cobertura de ganache.",
-                            active: true
-                        },
-                        {
-                            id: 2,
-                            name: "Canapés de Salmón",
-                            category: "salados",
-                            price: 4.75,
-                            image: "https://raw.githubusercontent.com/karicocina/web/main/fotos/canapes_salmon.jpg",
-                            description: "Refrescantes canapés con salmón ahumado, queso crema y eneldo.",
-                            active: true
-                        },
-                        {
-                            id: 3,
-                            name: "Macarons de Fresa",
-                            category: "dulces",
-                            price: 3.25,
-                            image: "https://raw.githubusercontent.com/karicocina/web/main/fotos/macarons_fresa.jpg",
-                            description: "Delicados macarons franceses con sabor a fresa y relleno de buttercream.",
-                            active: true
-                        }
-                    ]);
-                }
+                const sampleProducts = [
+                    {
+                        id: 1,
+                        name: "Mini Tarta de Chocolate",
+                        category: "dulces",
+                        price: 5.50,
+                        image: "https://raw.githubusercontent.com/karicocina/web/main/fotos/tarta_chocolate.jpg",
+                        description: "Deliciosa mini tarta de chocolate con relleno cremoso y cobertura de ganache.",
+                        active: true
+                    },
+                    {
+                        id: 2,
+                        name: "Canapés de Salmón",
+                        category: "salados",
+                        price: 4.75,
+                        image: "https://raw.githubusercontent.com/karicocina/web/main/fotos/canapes_salmon.jpg",
+                        description: "Refrescantes canapés con salmón ahumado, queso crema y eneldo.",
+                        active: true
+                    },
+                    {
+                        id: 3,
+                        name: "Macarons de Fresa",
+                        category: "dulces",
+                        price: 3.25,
+                        image: "https://raw.githubusercontent.com/karicocina/web/main/fotos/macarons_fresa.jpg",
+                        description: "Delicados macarons franceses con sabor a fresa y relleno de buttercream.",
+                        active: true
+                    }
+                ];
                 
-                if (!this.get('prices')) {
-                    this.set('prices', [
-                        {
-                            id: 1,
-                            productId: 1,
-                            productName: "Mini Tarta de Chocolate",
-                            size: "Unidad",
-                            price: 5.50,
-                            availability: "Disponible",
-                            location: "Tienda Central",
-                            date: new Date().toISOString().split('T')[0]
-                        }
-                    ]);
-                }
+                const samplePrices = [
+                    {
+                        id: 1,
+                        productId: 1,
+                        productName: "Mini Tarta de Chocolate",
+                        size: "Unidad",
+                        price: 5.50,
+                        availability: "Disponible",
+                        location: "Tienda Central",
+                        date: new Date().toISOString().split('T')[0]
+                    }
+                ];
                 
-                if (!this.get('customers')) {
-                    this.set('customers', []);
-                }
-                
-                if (!this.get('recipes')) {
-                    this.set('recipes', [
-                        {
-                            id: 1,
-                            name: "Mini Tarta de Chocolate",
-                            category: "dulces",
-                            ingredients: ["Chocolate negro", "Mantequilla", "Huevos", "Azúcar", "Harina", "Crema de leche"],
-                            instructions: "Derretir el chocolate con la mantequilla. Batir los huevos con el azúcar. Mezclar todos los ingredientes. Hornear a 180°C por 15 minutos.",
-                            prepTime: "30 minutos",
-                            servings: 6,
-                            image: "https://raw.githubusercontent.com/karicocina/web/main/recetas/tarta_chocolate_receta.jpg"
-                        }
-                    ]);
-                }
-                
-                if (!this.get('quotes')) {
-                    this.set('quotes', []);
-                }
-                
+                if (!this.get('products')) this.set('products', sampleProducts);
+                if (!this.get('prices')) this.set('prices', samplePrices);
+                if (!this.get('customers')) this.set('customers', []);
+                if (!this.get('recipes')) this.set('recipes', []);
+                if (!this.get('quotes')) this.set('quotes', []);
                 if (!this.get('testimonials')) {
                     this.set('testimonials', [
                         {
                             id: 1,
                             name: "María González",
                             event: "Cumpleaños 30",
-                            text: "¡Los bocados estaban deliciosos! Todos mis invitados quedaron encantados. El servicio fue impecable.",
-                            rating: 5
-                        },
-                        {
-                            id: 2,
-                            name: "Juan Pérez",
-                            event: "Evento Corporativo",
-                            text: "Profesionalismo y sabor excepcional. Perfecto para nuestros clientes importantes.",
+                            text: "¡Los bocados estaban deliciosos! Todos mis invitados quedaron encantados.",
                             rating: 5
                         }
                     ]);
@@ -1447,17 +1416,26 @@
             }
             
             get(key) {
-                const data = localStorage.getItem(this.prefix + key);
-                return data ? JSON.parse(data) : null;
+                try {
+                    const data = localStorage.getItem(this.prefix + key);
+                    return data ? JSON.parse(data) : null;
+                } catch (e) {
+                    console.error(`Error al obtener ${key}:`, e);
+                    return null;
+                }
             }
             
             set(key, value) {
-                localStorage.setItem(this.prefix + key, JSON.stringify(value));
+                try {
+                    localStorage.setItem(this.prefix + key, JSON.stringify(value));
+                } catch (e) {
+                    console.error(`Error al guardar ${key}:`, e);
+                }
             }
             
             add(key, item) {
                 const items = this.get(key) || [];
-                item.id = items.length ? Math.max(...items.map(i => i.id)) + 1 : 1;
+                item.id = items.length > 0 ? Math.max(...items.map(i => i.id)) + 1 : 1;
                 items.push(item);
                 this.set(key, items);
                 return item;
@@ -1480,9 +1458,9 @@
         }
         
         const db = new Database();
-        
+
         // =========================================================================
-        // SISTEMA DE NOTIFICACIONES
+        // NOTIFICATION SYSTEM
         // =========================================================================
         class NotificationSystem {
             constructor() {
@@ -1501,6 +1479,7 @@
                 
                 this.container.appendChild(notif);
                 setTimeout(() => notif.classList.add('show'), 10);
+                
                 setTimeout(() => {
                     notif.classList.remove('show');
                     setTimeout(() => notif.remove(), 300);
@@ -1509,9 +1488,9 @@
         }
         
         const notify = new NotificationSystem();
-        
+
         // =========================================================================
-        // SISTEMA DE CARRITO
+        // CART SYSTEM
         // =========================================================================
         class CartSystem {
             constructor() {
@@ -1543,6 +1522,7 @@
                 this.items = this.items.filter(i => i.id !== productId);
                 this.save();
                 this.updateUI();
+                this.render();
             }
             
             updateQuantity(productId, quantity) {
@@ -1554,6 +1534,7 @@
                         item.quantity = quantity;
                         this.save();
                         this.updateUI();
+                        this.render();
                     }
                 }
             }
@@ -1562,6 +1543,7 @@
                 this.items = [];
                 this.save();
                 this.updateUI();
+                this.render();
                 notify.show('Carrito vaciado', 'success');
             }
             
@@ -1576,9 +1558,7 @@
             toggle() {
                 const sidebar = document.getElementById('cartSidebar');
                 sidebar.classList.toggle('active');
-                if (sidebar.classList.contains('active')) {
-                    this.render();
-                }
+                if (sidebar.classList.contains('active')) this.render();
             }
             
             updateUI() {
@@ -1623,7 +1603,6 @@
                     return;
                 }
                 
-                // Simulate checkout
                 notify.show('Procesando pedido...', 'success');
                 setTimeout(() => {
                     this.clear();
@@ -1634,9 +1613,9 @@
         }
         
         const cart = new CartSystem();
-        
+
         // =========================================================================
-        // SISTEMA DE ADMINISTRACIÓN
+        // ADMIN SYSTEM
         // =========================================================================
         class AdminSystem {
             constructor() {
@@ -1685,12 +1664,10 @@
             switchTab(tabName) {
                 this.currentTab = tabName;
                 
-                // Update tab buttons
                 document.querySelectorAll('.admin-tab').forEach(tab => {
                     tab.classList.toggle('active', tab.dataset.tab === tabName);
                 });
                 
-                // Update tab panes
                 document.querySelectorAll('.admin-tab-pane').forEach(pane => {
                     pane.classList.toggle('active', pane.id === `${tabName}-tab`);
                 });
@@ -1700,21 +1677,11 @@
             
             loadTab(tabName) {
                 switch(tabName) {
-                    case 'products':
-                        this.loadProducts();
-                        break;
-                    case 'prices':
-                        this.loadPrices();
-                        break;
-                    case 'customers':
-                        this.loadCustomers();
-                        break;
-                    case 'recipes':
-                        this.loadRecipes();
-                        break;
-                    case 'quotes':
-                        this.loadQuotes();
-                        break;
+                    case 'products': this.loadProducts(); break;
+                    case 'prices': this.loadPrices(); break;
+                    case 'customers': this.loadCustomers(); break;
+                    case 'recipes': this.loadRecipes(); break;
+                    case 'quotes': this.loadQuotes(); break;
                 }
             }
             
@@ -1729,10 +1696,10 @@
                         <td><span class="badge bg-${p.category === 'dulces' ? 'pink' : 'warning'}">${p.category}</span></td>
                         <td>$${p.price.toFixed(2)}</td>
                         <td>
-                            <button class="btn btn-sm btn-warning" onclick="admin.edit('product', ${p.id})">
+                            <button class="btn btn-sm btn-warning" onclick="admin.editItem('products', ${p.id})">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button class="btn btn-sm btn-danger" onclick="admin.delete('product', ${p.id})">
+                            <button class="btn btn-sm btn-danger" onclick="admin.deleteItem('products', ${p.id})">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </td>
@@ -1752,10 +1719,10 @@
                         <td><span class="badge availability-badge ${p.availability.toLowerCase().replace(' ', '-')}">${p.availability}</span></td>
                         <td>${p.location}</td>
                         <td>
-                            <button class="btn btn-sm btn-warning" onclick="admin.edit('price', ${p.id})">
+                            <button class="btn btn-sm btn-warning" onclick="admin.editItem('prices', ${p.id})">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button class="btn btn-sm btn-danger" onclick="admin.delete('price', ${p.id})">
+                            <button class="btn btn-sm btn-danger" onclick="admin.deleteItem('prices', ${p.id})">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </td>
@@ -1774,10 +1741,10 @@
                         <td>${c.phone}</td>
                         <td>${c.address}</td>
                         <td>
-                            <button class="btn btn-sm btn-warning" onclick="admin.edit('customer', ${c.id})">
+                            <button class="btn btn-sm btn-warning" onclick="admin.editItem('customers', ${c.id})">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button class="btn btn-sm btn-danger" onclick="admin.delete('customer', ${c.id})">
+                            <button class="btn btn-sm btn-danger" onclick="admin.deleteItem('customers', ${c.id})">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </td>
@@ -1796,13 +1763,10 @@
                         <td>${r.prepTime}</td>
                         <td>${r.servings}</td>
                         <td>
-                            <button class="btn btn-sm btn-info" onclick="admin.viewRecipe(${r.id})">
-                                <i class="fas fa-eye"></i>
-                            </button>
-                            <button class="btn btn-sm btn-warning" onclick="admin.edit('recipe', ${r.id})">
+                            <button class="btn btn-sm btn-warning" onclick="admin.editItem('recipes', ${r.id})">
                                 <i class="fas fa-edit"></i>
                             </button>
-                            <button class="btn btn-sm btn-danger" onclick="admin.delete('recipe', ${r.id})">
+                            <button class="btn btn-sm btn-danger" onclick="admin.deleteItem('recipes', ${r.id})">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </td>
@@ -1825,7 +1789,7 @@
                             <button class="btn btn-sm btn-info" onclick="admin.viewQuote(${q.id})">
                                 <i class="fas fa-eye"></i>
                             </button>
-                            <button class="btn btn-sm btn-danger" onclick="admin.delete('quote', ${q.id})">
+                            <button class="btn btn-sm btn-danger" onclick="admin.deleteItem('quotes', ${q.id})">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </td>
@@ -1839,10 +1803,14 @@
                 tabContent.style.display = 'none';
                 container.style.display = 'block';
                 
+                const productOptions = (db.get('products') || []).map(p => 
+                    `<option value="${p.id}">${p.name}</option>`
+                ).join('');
+                
                 const forms = {
                     product: `
                         <h3>Agregar Producto</h3>
-                        <form id="addProductForm" onsubmit="admin.addProduct(event)">
+                        <form id="addProductForm" onsubmit="admin.addItem(event, 'product')">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Nombre *</label>
@@ -1878,12 +1846,12 @@
                     `,
                     price: `
                         <h3>Agregar Precio</h3>
-                        <form id="addPriceForm" onsubmit="admin.addPrice(event)">
+                        <form id="addPriceForm" onsubmit="admin.addItem(event, 'price')">
                             <div class="row">
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Producto *</label>
                                     <select class="form-select" id="priceProduct" required>
-                                        ${(db.get('products') || []).map(p => `<option value="${p.id}">${p.name}</option>`).join('')}
+                                        ${productOptions}
                                     </select>
                                 </div>
                                 <div class="col-md-6 mb-3">
@@ -1920,6 +1888,75 @@
                                 <button type="button" class="btn btn-secondary" onclick="admin.hideForm()">Cancelar</button>
                             </div>
                         </form>
+                    `,
+                    customer: `
+                        <h3>Agregar Cliente</h3>
+                        <form id="addCustomerForm" onsubmit="admin.addItem(event, 'customer')">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Nombre Completo *</label>
+                                    <input type="text" class="form-control" id="customerName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Email *</label>
+                                    <input type="email" class="form-control" id="customerEmail" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Teléfono *</label>
+                                    <input type="tel" class="form-control" id="customerPhone" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Dirección *</label>
+                                    <input type="text" class="form-control" id="customerAddress" required>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="button" class="btn btn-secondary" onclick="admin.hideForm()">Cancelar</button>
+                            </div>
+                        </form>
+                    `,
+                    recipe: `
+                        <h3>Agregar Receta</h3>
+                        <form id="addRecipeForm" onsubmit="admin.addItem(event, 'recipe')">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Nombre *</label>
+                                    <input type="text" class="form-control" id="recipeName" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Categoría *</label>
+                                    <select class="form-select" id="recipeCategory" required>
+                                        <option value="dulces">Dulces</option>
+                                        <option value="salados">Salados</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Tiempo de Preparación *</label>
+                                    <input type="text" class="form-control" id="recipePrepTime" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Porciones *</label>
+                                    <input type="number" class="form-control" id="recipeServings" required>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Ingredientes (separados por coma) *</label>
+                                <textarea class="form-control" id="recipeIngredients" rows="3" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Instrucciones *</label>
+                                <textarea class="form-control" id="recipeInstructions" rows="5" required></textarea>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <button type="submit" class="btn btn-primary">Guardar</button>
+                                <button type="button" class="btn btn-secondary" onclick="admin.hideForm()">Cancelar</button>
+                            </div>
+                        </form>
                     `
                 };
                 
@@ -1931,57 +1968,86 @@
                 document.getElementById('adminTabContent').style.display = 'block';
             }
             
-            addProduct(e) {
+            addItem(e, type) {
                 e.preventDefault();
-                const product = {
-                    name: document.getElementById('prodName').value,
-                    category: document.getElementById('prodCategory').value,
-                    price: parseFloat(document.getElementById('prodPrice').value),
-                    image: document.getElementById('prodImage').value,
-                    description: document.getElementById('prodDescription').value,
-                    active: true
-                };
                 
-                db.add('products', product);
+                let item = {};
+                
+                switch(type) {
+                    case 'product':
+                        item = {
+                            name: document.getElementById('prodName').value,
+                            category: document.getElementById('prodCategory').value,
+                            price: parseFloat(document.getElementById('prodPrice').value),
+                            image: document.getElementById('prodImage').value,
+                            description: document.getElementById('prodDescription').value,
+                            active: true
+                        };
+                        break;
+                    case 'price':
+                        const productId = parseInt(document.getElementById('priceProduct').value);
+                        const product = db.get('products').find(p => p.id === productId);
+                        item = {
+                            productId,
+                            productName: product.name,
+                            size: document.getElementById('priceSize').value,
+                            price: parseFloat(document.getElementById('priceValue').value),
+                            availability: document.getElementById('priceAvailability').value,
+                            location: document.getElementById('priceLocation').value,
+                            date: document.getElementById('priceDate').value
+                        };
+                        break;
+                    case 'customer':
+                        item = {
+                            name: document.getElementById('customerName').value,
+                            email: document.getElementById('customerEmail').value,
+                            phone: document.getElementById('customerPhone').value,
+                            address: document.getElementById('customerAddress').value
+                        };
+                        break;
+                    case 'recipe':
+                        item = {
+                            name: document.getElementById('recipeName').value,
+                            category: document.getElementById('recipeCategory').value,
+                            ingredients: document.getElementById('recipeIngredients').value.split(',').map(i => i.trim()),
+                            instructions: document.getElementById('recipeInstructions').value,
+                            prepTime: document.getElementById('recipePrepTime').value,
+                            servings: parseInt(document.getElementById('recipeServings').value)
+                        };
+                        break;
+                }
+                
+                db.add(type, item);
                 this.hideForm();
-                this.loadTab('products');
-                notify.show('Producto agregado correctamente', 'success');
+                this.loadTab(this.currentTab);
+                notify.show(`${type.charAt(0).toUpperCase() + type.slice(1)} agregado correctamente`, 'success');
             }
             
-            addPrice(e) {
-                e.preventDefault();
-                const productId = parseInt(document.getElementById('priceProduct').value);
-                const product = db.get('products').find(p => p.id === productId);
-                
-                const price = {
-                    productId,
-                    productName: product.name,
-                    size: document.getElementById('priceSize').value,
-                    price: parseFloat(document.getElementById('priceValue').value),
-                    availability: document.getElementById('priceAvailability').value,
-                    location: document.getElementById('priceLocation').value,
-                    date: document.getElementById('priceDate').value
-                };
-                
-                db.add('prices', price);
-                this.hideForm();
-                this.loadTab('prices');
-                notify.show('Precio agregado correctamente', 'success');
+            editItem(type, id) {
+                notify.show('Función de edición en desarrollo', 'success');
             }
             
-            delete(type, id) {
-                if (confirm(`¿Está seguro de eliminar este ${type}?`)) {
+            deleteItem(type, id) {
+                if (confirm(`¿Está seguro de eliminar este ${type.slice(0, -1)}?`)) {
                     db.delete(type, id);
                     this.loadTab(this.currentTab);
                     notify.show('Elemento eliminado correctamente', 'success');
                 }
             }
+            
+            viewQuote(id) {
+                const quotes = db.get('quotes') || [];
+                const quote = quotes.find(q => q.id === id);
+                if (quote) {
+                    alert(`Detalles del presupuesto:\n\nCliente: ${quote.name}\nEvento: ${quote.eventType}\nFecha: ${quote.date}\nInvitados: ${quote.guests}\n\nServicios: ${quote.services?.join(', ') || 'Ninguno'}\nMensaje: ${quote.message || 'Sin mensaje'}`);
+                }
+            }
         }
         
         const admin = new AdminSystem();
-        
+
         // =========================================================================
-        // SISTEMA DE PRODUCTOS
+        // PRODUCT SYSTEM
         // =========================================================================
         class ProductSystem {
             constructor() {
@@ -2046,9 +2112,9 @@
         }
         
         const productSystem = new ProductSystem();
-        
+
         // =========================================================================
-        // SISTEMA DE TESTIMONIOS
+        // TESTIMONIAL SYSTEM
         // =========================================================================
         class TestimonialSystem {
             constructor() {
@@ -2075,7 +2141,6 @@
                     </li>
                 `).join('');
                 
-                // Initialize Splide
                 if (this.testimonials.length > 0) {
                     new Splide('#testimonialSlider', {
                         type: 'loop',
@@ -2090,12 +2155,14 @@
         }
         
         const testimonialSystem = new TestimonialSystem();
-        
+
         // =========================================================================
-        // GESTIÓN DE FORMULARIOS
+        // FORM HANDLERS
         // =========================================================================
         document.getElementById('quoteForm')?.addEventListener('submit', function(e) {
             e.preventDefault();
+            
+            const services = Array.from(document.querySelectorAll('#quoteForm input[type="checkbox"]:checked')).map(cb => cb.value);
             
             const quote = {
                 name: document.getElementById('quoteName').value,
@@ -2103,8 +2170,8 @@
                 phone: document.getElementById('quotePhone').value,
                 date: document.getElementById('quoteDate').value,
                 eventType: document.getElementById('quoteEventType').value,
-                guests: document.getElementById('quoteGuests').value,
-                services: Array.from(document.querySelectorAll('#quoteForm input[type="checkbox"]:checked')).map(cb => cb.value),
+                guests: parseInt(document.getElementById('quoteGuests').value),
+                services: services,
                 message: document.getElementById('quoteMessage').value,
                 created: new Date().toISOString(),
                 status: 'pending'
@@ -2114,24 +2181,23 @@
             this.reset();
             notify.show('Solicitud enviada correctamente. Nos contactaremos pronto.', 'success');
         });
-        
-        // Admin login
+
         document.getElementById('adminLoginForm')?.addEventListener('submit', function(e) {
             admin.login(e);
         });
-        
+
         // Tab switching
         document.querySelectorAll('.admin-tab').forEach(tab => {
             tab.addEventListener('click', () => admin.switchTab(tab.dataset.tab));
         });
-        
+
         // =========================================================================
-        // UTILIDADES GENERALES
+        // UTILITIES
         // =========================================================================
         function scrollTo(sectionId) {
             document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
         }
-        
+
         function toggleTheme() {
             const html = document.documentElement;
             const current = html.getAttribute('data-theme');
@@ -2141,7 +2207,7 @@
             const icon = document.querySelector('.theme-toggle i');
             icon.className = next === 'light' ? 'fas fa-moon' : 'fas fa-sun';
         }
-        
+
         // Scroll animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -2150,18 +2216,17 @@
                 }
             });
         }, { threshold: 0.1 });
-        
+
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
-        
+
         // Search and filter
         document.getElementById('productSearch')?.addEventListener('input', () => productSystem.render());
         document.getElementById('categoryFilter')?.addEventListener('change', () => productSystem.render());
-        
+
         // =========================================================================
-        // INICIALIZACIÓN
+        // INITIALIZATION
         // =========================================================================
         window.addEventListener('DOMContentLoaded', () => {
-            // Simulate loading
             setTimeout(() => {
                 document.getElementById('loader').classList.add('hidden');
                 productSystem.render();
@@ -2169,8 +2234,8 @@
                 testimonialSystem.render();
             }, 1000);
         });
-        
-        // Global functions for onclick
+
+        // Global functions
         window.scrollTo = scrollTo;
         window.toggleTheme = toggleTheme;
         window.cart = cart;
